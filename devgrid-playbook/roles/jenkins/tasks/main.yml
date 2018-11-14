@@ -1,0 +1,43 @@
+- name: install Java8
+  yum:
+    name: "{{java.VERSION}}"
+    state: present
+  become: true
+
+- name: remove java-1.7.0-openjdk package
+  yum:
+    name: java-1.7.0-openjdk
+    state: absent
+  become: true
+
+- name: Download Jenkins Repo
+  get_url:
+    url: "{{jenkins.repo_URL}}"
+    dest: /etc/yum.repos.d/jenkins.repo
+  become: true
+
+- name: Import Key
+  rpm_key:
+    state: present
+    key: "{{jenkins.gpg_key}}"
+  become: true
+
+- name: Install Jenkins
+  yum:
+    name: jenkins
+    state: present
+  become: true
+
+- name: Change Java options Jenkins
+  lineinfile:
+    dest=/etc/sysconfig/jenkins
+    regexp=^JENKINS_JAVA_OPTIONS=
+    line=JENKINS_JAVA_OPTIONS="{{jenkins.JAVA_OPTIONS}}"
+  become: true
+
+- name: Start Jenkins
+  service:
+    name: jenkins
+    state: started
+    enabled: yes
+  become: true
