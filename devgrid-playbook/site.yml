@@ -1,5 +1,13 @@
 - hosts: all
+
   roles:
     - jenkins
   tags: jenkins
+
+- hosts: all
+ 
+  roles:
+    - maven
+  tags: maven
+
   

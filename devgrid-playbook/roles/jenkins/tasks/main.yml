@@ -41,3 +41,21 @@
     state: started
     enabled: yes
   become: true
+
+- name: Saferestart Jenkins
+  command: "sleep 240" 
+  become: true
+
+- name: Install Jenkins plugins
+  command: "java -jar /var/cache/jenkins/war/WEB-INF/jenkins-cli.jar -s http://127.0.0.1:8080/ install-plugin {{item}}"
+  with_items:
+    - github
+    - workflow-aggregator
+    - maven-plugin
+    - job-dsl
+    - pipeline-github
+  become: true
+
+- name: Saferestart Jenkins
+  command: "java -jar /var/cache/jenkins/war/WEB-INF/jenkins-cli.jar -s http://127.0.0.1:8080/ safe-restart" 
+  become: true
