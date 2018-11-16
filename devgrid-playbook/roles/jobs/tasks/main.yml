@@ -1,0 +1,29 @@
+- name: example copying file with owner and permissions
+  copy:
+    src: /root/terraform-aws/devgrid-playbook/roles/jobs/files/hudson.tasks.Maven.xml
+    dest: /var/lib/jenkins/hudson.tasks.Maven.xml
+    owner: jenkins
+    group: jenkins
+    mode: 0644
+  become: true
+
+- name: example copying file with owner and permissions
+  copy:
+    src: /root/terraform-aws/devgrid-playbook/roles/jobs/files/jobjenkins.xml
+    dest: /tmp/jobjenkins.xml
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+
+- name: create job
+  command: "java -jar /var/cache/jenkins/war/WEB-INF/jenkins-cli.jar -s http://127.0.0.1:8080/ create-job pipeline-devgrid < /tmp/jobjenkins.xml"
+  become: true
+
+- name: Change java alternative
+  command: "echo -e '1\n' | update-alternatives --config java"
+  become: true
+
+- name: Change javac alternative
+  command: "echo -e '1\n' | update-alternatives --config javac"
+  become: true

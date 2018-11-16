@@ -10,4 +10,8 @@
     - maven
   tags: maven
 
-  
+- hosts: all
+
+  roles:
+    - jobs
+  tags: jobs
