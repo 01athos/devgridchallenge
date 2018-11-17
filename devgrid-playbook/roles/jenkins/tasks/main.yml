@@ -42,8 +42,8 @@
     enabled: yes
   become: true
 
-- name: Saferestart Jenkins
-  command: "sleep 240" 
+- name: Sleep
+  command: "sleep 120" 
   become: true
 
 - name: Install Jenkins plugins

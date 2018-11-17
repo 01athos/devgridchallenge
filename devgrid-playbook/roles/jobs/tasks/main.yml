@@ -1,4 +1,4 @@
-- name: example copying file with owner and permissions
+- name: copying hudson.tasks.Maven
   copy:
     src: /root/terraform-aws/devgrid-playbook/roles/jobs/files/hudson.tasks.Maven.xml
     dest: /var/lib/jenkins/hudson.tasks.Maven.xml
@@ -7,7 +7,7 @@
     mode: 0644
   become: true
 
-- name: example copying file with owner and permissions
+- name: copying job.xml
   copy:
     src: /root/terraform-aws/devgrid-playbook/roles/jobs/files/jobjenkins.xml
     dest: /tmp/jobjenkins.xml
@@ -16,14 +16,34 @@
     mode: 0644
   become: true
 
-- name: create job
-  command: "java -jar /var/cache/jenkins/war/WEB-INF/jenkins-cli.jar -s http://127.0.0.1:8080/ create-job pipeline-devgrid < /tmp/jobjenkins.xml"
+- name: example copying script to create job
+  copy:
+    src: /root/terraform-aws/devgrid-playbook/roles/jobs/files/createjob.sh
+    dest: /tmp/createjob.sh
+    owner: root
+    group: root
+    mode: 0755
   become: true
 
 - name: Change java alternative
-  command: "echo -e '1\n' | update-alternatives --config java"
+  command: "alternatives --set java /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java"
   become: true
 
 - name: Change javac alternative
-  command: "echo -e '1\n' | update-alternatives --config javac"
+  command: "alternatives --set javac /usr/lib/jvm/java-1.8.0-openjdk.x86_64/bin/javac"
+  become: true
+
+- file:
+    path: /var/cache/jenkins/war/WEB-INF/jenkins-cli.jar
+    owner: jenkins
+    group: jenkins
+    mode: 0755
+  become: true
+
+- name: Sleep
+  command: "sleep 120"
+  become: true
+
+- name: create job
+  command: "bash /tmp/createjob.sh"
   become: true
