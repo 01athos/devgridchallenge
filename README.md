@@ -1,5 +1,5 @@
 # devgridchallenge
-* Access the Instance with command "ssh -i ansibledevgrid.pem ec2-user@ec2-18-216-129-210.us-east-2.compute.amazonaws.com"
+* Access the Instance with command "ssh -i keyname.pem ec2-user@ec2-18-216-129-210.us-east-2.compute.amazonaws.com"
 * This instance contains the ansibleserver and terraform installed that I´ve used to automation the test, to run the test, please follow the steps(execute the commands) below:
 	* "$sudo su -"
 	* "#cd terraform-aws"
