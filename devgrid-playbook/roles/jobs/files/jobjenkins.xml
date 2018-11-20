@@ -46,9 +46,12 @@
       mvnHome = tool &apos;Maven 3.5.2&apos;
       sh &quot;cd calculator-service-test &amp;&amp; &apos;${mvnHome}/bin/mvn&apos; clean test&quot;
    }
-   stage(&apos;Results&apos;) {
+   stage(&apos; Test Results&apos;) {
       junit &apos;**/target/surefire-reports/TEST-*.xml&apos;
       archive &apos;target/*.jar&apos;
+   }
+   stage(&apos; Deploy Application&apos;) {
+      sh &quot;echo &apos;Here we can deploy the aplication to production&apos;&quot;
    }
 }</script>
     <sandbox>true</sandbox>

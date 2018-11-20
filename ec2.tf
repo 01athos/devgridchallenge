@@ -10,7 +10,7 @@ resource "aws_instance" "jenkins_master" {
 	subnet_id			= "subnet-0c88800b4d1404bad"
 	associate_public_ip_address 	= true
 	provisioner "local-exec" {
-        	command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ec2-user --private-key /root/ansibledevgrid.pem -i '${aws_instance.jenkins_master.public_ip},' ./devgrid-playbook/site.yml"
+        	command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ec2-user --private-key /root/ansibledevgrid.pem -i '${aws_instance.jenkins_master.public_ip},' /root/terraform-aws/devgrid-playbook/site.yml"
         }	 
 }
 
