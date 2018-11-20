@@ -8,5 +8,5 @@
 	*  Open a Browser and put "http://ipaddress:8080", the jenkins will open.
 	*  Access the Pipeline job and run it, after that you could see the tests results.
 
-#### Importante #####
+#### Important #####
 The key that you will use to connect on the instance will be attached on email.
