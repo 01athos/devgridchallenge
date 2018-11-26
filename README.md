@@ -6,6 +6,7 @@
 	* "#terraform apply"
 	*  The third step can execute around 10 minutes, After that copy the public IpAddress on the output of the last command(I think this information is located on the last line).
 	*  Open a Browser and put "http://ipaddress:8080", the jenkins will open.
+	*  On Jenkins There is a job called Pipeline, this job will be execute on each commit made on https://github.com/devgrid/calculator-service repository. The configuration is made only on Jenkins side, because on this repository I did´t have access on "Settings".
 	*  Access the Pipeline job and run it, after that you could see the tests results.
 
 #### Important #####
